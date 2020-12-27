@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .main {
+
+            display: flex;
+            justify-content: center;
+        }
+        h1{
+            color: white;
+        }
+        h3{
+            color: white;
+        }
+    </style>
+    <script src="app.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="head">
+            <div class="logOut">
+                <a class="topBtn" href="signin.html">
+                    Sign out</a>
+
+            </div>
+            <div class="profileName" id="one">
+                <!-- <a class="topBtn" href="">
+                    Sign up
+                </a> -->
+
+            </div>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="card">
+            <div class="content">
+                <h4>Shirt</h4>
+                <p>Price: <span id="shirtPrice">800</span></p>
+                <input class="shopInp" type="number" id="shirtQuantity">
+                <button class="btnShop"  onclick="addCart()">Add</button>
+                <h1 id="shirtTotal">
+
+                </h1>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h4>Pent</h4>
+                <p>Price: <span id="pantPrice">1100</span></p>
+                <input class="shopInp" type="number" id="pantQuantity">
+                <button class="btnShop" onclick="addPant()">Add</button>
+                <h1 id="pantTotal">
+
+                </h1>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h4>Shoes</h4>
+                <p>Price: <span id="shoesPrice">2000</span></p>
+                <input class="shopInp" type="number" id="shoesQuantity">
+            </div>
+            <button class="btnShop" onclick="addShoes()">Add</button>
+            <h1 id="shoesTotal">
+
+            </h1>
+        </div>
+        <br>
+    </div>
+
+    <div class="result">
+        <button onclick="checkout()">CheckOut</button>
+        <h3 id="checkout">
+
+        </h3>
+    </div>
+
+    <script>
+
+        let newRes = JSON.parse(localStorage.getItem("userData") );
+        console.log(newRes)
+        let newName = newRes.name;
+        console.log(newName)
+        document.getElementById("one").innerHTML = newName;
+
+
+        // const Http = new XMLHttpRequest();
+        // // const url = 'http://192.168.40.60:3000/login';
+        // const url = 'http://192.168.0.105:3000/login';
+        // // const url = 'https://legend-99.herokuapp.com/login';
+        // Http.open("GET", url);
+        // Http.setRequestHeader("Content-type", "application/json")
+
+        function addCart() {
+            var shirtTotal = document.getElementById("shirtTotal");
+            var shirt = parseInt(document.getElementById("shirtPrice").innerText);
+            var shirtQuantity = parseInt(document.getElementById("shirtQuantity").value);
+            shirtSum = shirt * shirtQuantity;
+            shirtTotal.innerHTML = shirtSum;
+            document.getElementById("shirtQuantity").readonly = true;
+        }
+        function addPant() {
+            var pantTotal = document.getElementById("pantTotal");
+            var pantPrice = parseInt(document.getElementById("pantPrice").innerText);
+            var pantQuantity = parseInt(document.getElementById("pantQuantity").value);
+            pantSum = pantPrice * pantQuantity;
+            pantTotal.innerHTML = pantSum;
+        }
+        function addShoes() {
+            var shoesTotal = document.getElementById("shoesTotal");
+            var shoesPrice = parseInt(document.getElementById("shoesPrice").innerText);
+            var shoesQuantity = parseInt(document.getElementById("shoesQuantity").value);
+            shoesSum = shoesPrice * shoesQuantity;
+            shoesTotal.innerHTML = shoesSum;
+        }
+        function checkout() {
+            sum = parseInt(shoesTotal.innerHTML) + parseInt(pantTotal.innerHTML) + parseInt(shirtTotal.innerHTML)
+            document.getElementById("checkout").innerHTML = sum;
+        }
+
+
+    </script>
+
+</body>
+
+</html>
